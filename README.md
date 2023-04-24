@@ -16,7 +16,7 @@ on Pandoc and Bash. Progress is chronicled at <https://benjaminwuethrich.dev>.
 
 ## Installation
 
-Use:
+Use
 
 ```bash
 make install
