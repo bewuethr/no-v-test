@@ -4,9 +4,28 @@ on:
   workflow_dispatch:
   push:
     tags:
-      - v[0-9]+.[0-9]+.[0-9]+
+      - '[0-9]+.[0-9]+.[0-9]+'
 
 jobs:
   update-release-tags:
-    name: Update release tags
-    uses: bewuethr/workflows/.github/workflows/releasetracker.yml@main
+    name: Update tags
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Check out code
+        uses: actions/checkout@v3
+        with:
+          # Get complete history
+          fetch-depth: 0
+
+      - name: Update major version and latest tags
+        uses: bewuethr/release-tracker-action@43-support-tags-without-v
+        env:
+          # GitHub token to enable pushing tags
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          # Move "latest" tag
+          update-latest: true
+          # Don't update the vX.Y tags
+          update-minor: false
+          prepend-v: false
