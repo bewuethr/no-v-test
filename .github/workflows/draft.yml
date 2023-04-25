@@ -29,3 +29,11 @@ jobs:
     steps:
       - name: Print message
         run: echo Hello
+
+  test3:
+    name: With quoted false
+    runs-on: ubuntu-22.04
+    if: github.event.pull_request.draft == 'false'
+    steps:
+      - name: Print message
+        run: echo Hello
