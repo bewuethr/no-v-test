@@ -2,7 +2,7 @@ name: Only draft
 
 on:
   pull_request:
-    type:
+    types:
       - opened
       - edited
       - reopened
@@ -14,11 +14,18 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test:
-    name: Only run on non-draft
+  test1:
+    name: With exclamation point
     runs-on: ubuntu-22.04
     if: '! github.event.pull_request.draft'
+    steps:
+      - name: Print message
+        run: echo Hello
 
+  test2:
+    name: With false
+    runs-on: ubuntu-22.04
+    if: github.event.pull_request.draft == false
     steps:
       - name: Print message
         run: echo Hello
