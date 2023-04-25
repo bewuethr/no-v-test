@@ -1,4 +1,4 @@
-name: Testing
+name: Only draft
 
 on:
   pull_request:
