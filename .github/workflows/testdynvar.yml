@@ -23,4 +23,5 @@ jobs:
           pass: ${{ secrets[format('{0} {1}', 'PASSWORD_', inputs.env)] }}
         run: |
           echo "The password for ${{ inputs.env }} is $pass"
+          echo "Key is ${{ format('{0} {1}', 'PASSWORD_', inputs.env) }}"
           echo "${{ secrets[format('{0} {1}', 'PASSWORD_', inputs.env)] }}"
