@@ -20,7 +20,6 @@ jobs:
 
       - name: Print dynamic secret
         env:
-          pass: >
-            ${{ secrets[format('{0} {1}', 'PASSWORD_', inputs.env)] }}
+          pass: ${{ secrets[format('{0} {1}', 'PASSWORD_', inputs.env)] }}
         run: |
           echo "The password for ${{ inputs.env }} is $pass"
