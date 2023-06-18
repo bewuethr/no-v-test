@@ -8,7 +8,7 @@ on:
 
 jobs:
   testdynvar:
-    name: Test dyamic variable names
+    name: Test dynamic variable names
     runs-on: ubuntu-22.04
 
     steps:
@@ -20,8 +20,8 @@ jobs:
 
       - name: Print dynamic secret
         env:
-          pass: ${{ secrets[format('{0} {1}', 'PASSWORD_', inputs.env)] }}
+          pass: ${{ secrets[format('PASSWORD_{1}', inputs.env)] }}
         run: |
           echo "The password for ${{ inputs.env }} is $pass"
-          echo "Key is ${{ format('{0} {1}', 'PASSWORD_', inputs.env) }}"
-          echo "${{ secrets[format('{0} {1}', 'PASSWORD_', inputs.env)] }}"
+          echo "Key is ${{ format('{0}{1}', 'PASSWORD_', inputs.env) }}"
+          echo "${{ secrets[format('{0}{1}', 'PASSWORD_', inputs.env)] }}"
