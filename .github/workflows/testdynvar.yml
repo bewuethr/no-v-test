@@ -14,4 +14,4 @@ jobs:
     steps:
       - name: Print concatenated variable
         run: |
-          echo "${{ format({0} {1}, 'something', 'something else') }}"
+          echo "${{ format('{0} {1}', 'something', 'something else') }}"
