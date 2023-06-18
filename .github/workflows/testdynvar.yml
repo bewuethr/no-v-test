@@ -1,0 +1,19 @@
+name: Test dynamic variable names
+
+on:
+  workflow_dispatch:
+    inputs:
+      env:
+        description: environment
+
+jobs:
+  testdynvar:
+    name: Test dyamic variable names
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Print concatenated variable
+        env:
+          var: ${{ 'something' + inputs.env }}
+        run: |
+          echo "$var"
