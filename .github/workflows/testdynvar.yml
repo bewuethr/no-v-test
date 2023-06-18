@@ -17,3 +17,10 @@ jobs:
           var: ${{ format('{0} {1}', 'something', 'something else') }}
         run: |
           echo "$var"
+
+      - name: Print dynamic secret
+        env:
+          pass: >
+            ${{ secrets[${{ format('{0} {1}', 'PASSWORD_', inputs.env) }}] }}
+        run: |
+          echo "The password is $pass"
