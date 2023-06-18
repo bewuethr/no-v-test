@@ -13,5 +13,7 @@ jobs:
 
     steps:
       - name: Print concatenated variable
+        env:
+          var: ${{ format('{0} {1}', 'something', 'something else') }}
         run: |
-          echo "${{ format('{0} {1}', 'something', 'something else') }}"
+          echo "$var"
