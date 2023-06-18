@@ -10,18 +10,20 @@ jobs:
   testdynvar:
     name: Test dynamic variable names
     runs-on: ubuntu-22.04
-
     steps:
-      - name: Print concatenated variable
-        env:
-          var: ${{ format('{0} {1}', 'something', 'something else') }}
-        run: |
-          echo "$var"
-
       - name: Print dynamic secret
         env:
           pass: ${{ secrets[format('PASSWORD_{0}', inputs.env)] }}
         run: |
           echo "The password for ${{ inputs.env }} is $pass"
-          echo "Key is ${{ format('{0}{1}', 'PASSWORD_', inputs.env) }}"
-          echo "${{ secrets[format('{0}{1}', 'PASSWORD_', inputs.env)] }}"
+
+  dynenv:
+    name: Test dynamic environment name
+    runs-on: ubuntu-22.04
+    environment: ${{ inputs.env }}
+    steps:
+      - name: Print secret
+        env:
+          pass: ${{ secrets.PASSWORD }}
+        run: |
+          echo "The password for ${{ inputs.env }} is $pass"
