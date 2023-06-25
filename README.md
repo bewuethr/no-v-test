@@ -5,7 +5,7 @@
 [![Move release tags][movebadge]][movewf]
 
 Pandoc Bash Blog provides `pbb`, a simple generator for static blog sites based
-on Pandoc and Bash. Progress is chronicled at <https://benjaminwuethrich.dev>.
+on Pandoc and Bash. Progress is chronicled at <https://benjaminwuethrich.dev>!
 
 [lintbadge]: <https://github.com/bewuethr/pandoc-bash-blog/actions/workflows/linter.yml/badge.svg>
 [lintwf]: <https://github.com/bewuethr/pandoc-bash-blog/actions/workflows/linter.yml>

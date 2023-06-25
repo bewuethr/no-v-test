@@ -1,0 +1,39 @@
+name: Only draft
+
+on:
+  pull_request:
+    types:
+      - opened
+      - edited
+      - reopened
+      - synchronize
+      - ready_for_review
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref }}
+  cancel-in-progress: true
+
+jobs:
+  test1:
+    name: With exclamation point
+    runs-on: ubuntu-22.04
+    if: '! github.event.pull_request.draft'
+    steps:
+      - name: Print message
+        run: echo Hello
+
+  test2:
+    name: With false
+    runs-on: ubuntu-22.04
+    if: github.event.pull_request.draft == false
+    steps:
+      - name: Print message
+        run: echo Hello
+
+  test3:
+    name: With quoted false
+    runs-on: ubuntu-22.04
+    if: github.event.pull_request.draft == 'false'
+    steps:
+      - name: Print message
+        run: echo Hello
