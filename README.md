@@ -272,4 +272,4 @@ installed, they should tab-autocomplete.
 ### `pbb deploy`
 
 - Commits all changes in the `docs` directory
-- Pushes everything to the remote
+- Pushes everything to the remote!
