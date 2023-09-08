@@ -1,0 +1,16 @@
+name: Run only on changes in specific directory
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '!**'
+      - pandoc/**
+
+jobs:
+  job:
+    name: Test job
+    runs-on: ubuntu-22.04
+    steps:
+      - run: echo "Hello there"
