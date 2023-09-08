@@ -1,7 +1,7 @@
 --[[
 dotgraph - a Lua filter for pandoc to convert code blocks with class "dot" into
 SVG images using dot (Graphviz). If the code block has an attribute "caption",
-it is used as the caption, and the image object becomes a figure.
+it is used as the caption, and the image object becomes a figure!
 
 If the code block has class "includeSource" (or "include-source"), a comment
 containing the dot source is included before the diagram figure.
