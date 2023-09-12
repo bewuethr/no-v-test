@@ -12,9 +12,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/github-script@v6.4.1
+        env:
+          name: ${{ github.event.inputs.NAME }}
         with:
           script: |
-            const newTitle = '${{ github.event.inputs.NAME }} - UPDATED';
+            const newTitle = process.env.name + ' - UPDATED';
             github.rest.issues.update({
               issue_number: 1,
               owner: context.repo.owner,
