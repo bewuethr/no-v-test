@@ -16,8 +16,8 @@ jobs:
           script: |
             const newTitle = '${{ github.event.inputs.NAME }} - UPDATED';
             github.issues.update({
-              issue_number: `1`,
-              owner: `user`,
-              repo: `my-repo`,
+              issue_number: 1,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
               title: newTitle
-            })
+            });
