@@ -15,5 +15,4 @@ jobs:
           name: ${{ github.event.inputs.NAME }}
           GITHUB_TOKEN: ${{ github.token }}
         run: |
-          gh issue edit --repo "$GITHUB_REPOSITORY" 1 \
-              --title "$name - UPDATED"
+          gh issue edit --repo "$GITHUB_REPOSITORY" 1 --title "$name - UPDATED"
