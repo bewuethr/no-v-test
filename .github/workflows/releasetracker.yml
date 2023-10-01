@@ -28,4 +28,3 @@ jobs:
           update-latest: true
           # Don't update the vX.Y tags
           update-minor: false
-          prepend-v: false
