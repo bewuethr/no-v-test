@@ -1,0 +1,24 @@
+name: Test dynamic variable names
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-multi-line:
+    name: Test multi-line output
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Set output
+        id: set
+        run: |
+          {
+            echo "param<<EOF"
+            curl wttr.in?format=j1
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Print output
+        env:
+          param: ${{ steps.set.outputs.param }}
+        run: |
+          printf '%s\n' "$param"
