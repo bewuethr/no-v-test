@@ -11,10 +11,11 @@ jobs:
       - name: Set output
         id: set
         run: |
+          delim=$(tr -dc '[:upper:]' < /dev/urandom | head -c8)
           {
-            echo "param<<EOF"
+            echo "param<<$delim"
             curl wttr.in?format=j1
-            echo "EOF"
+            echo "$delim"
           } >> "$GITHUB_OUTPUT"
 
       - name: Print output
