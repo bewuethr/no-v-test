@@ -1,4 +1,4 @@
-name: Test dynamic variable names
+name: Test multi-line output parameters
 
 on:
   workflow_dispatch:
