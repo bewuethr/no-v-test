@@ -8,7 +8,7 @@ containing the dot source is included before the diagram figure.
 
 This does not use the mediabag and the --extract-media option, because that
 doesn't play well with relative paths. Instead, the produced image is written
-directly to a file.
+directly to a file!
 --]]
 
 -- A filter operating on code blocks
