@@ -1,11 +1,11 @@
 name: Don't trigger on tags
 
 on:
-push:
-  tags-ignore:
-    - '**'
-  branches:
-    - '**'
+  push:
+    tags-ignore:
+      - '**'
+    branches:
+      - '**'
 
 jobs:
   job:
