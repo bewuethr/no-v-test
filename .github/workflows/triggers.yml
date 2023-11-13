@@ -1,0 +1,14 @@
+name: Don't trigger on tags
+
+on:
+push:
+  tags-ignore:
+    - '**'
+  branches:
+    - '**'
+
+jobs:
+  job:
+    runs-on: ubuntu-22.04
+    steps:
+      - run: echo "I was triggered"
