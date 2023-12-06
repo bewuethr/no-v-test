@@ -1,18 +1,7 @@
-name: Appends "UPDATED" to specified issue's title
-
-on:
-  workflow_dispatch:
-    inputs:
-      NAME:
-        type: string
-
-
+on: delete
 jobs:
-  update-issue:
+  delete:
     runs-on: ubuntu-latest
     steps:
-      - env:
-          name: ${{ github.event.inputs.NAME }}
-          GITHUB_TOKEN: ${{ github.token }}
-        run: |
-          gh issue edit --repo "$GITHUB_REPOSITORY" 1 --title "$name - UPDATED"
+      - run: |
+          jq . "$GITHUB_EVENT_PATH"
