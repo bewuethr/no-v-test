@@ -1,0 +1,31 @@
+name: Testing
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+    steps:
+      - id: set
+        run: |
+          echo "true=true" >> "$GITHUB_OUTPUT"
+          echo "false=false" >> "$GITHUB_OUTPUT"
+
+      - if: steps.set.outputs.true
+        run: echo "steps.set.outputs.true was true"
+
+      - if: steps.set.outputs.true == 'true'
+        run: echo "steps.set.outputs.true == 'true' was true"
+
+      - if: steps.set.outputs.true == true
+        run: echo "steps.set.outputs.val == true was true"
+
+      - if: '!steps.set.outputs.false'
+        run: echo "steps.set.outputs.false was false"
+
+      - if: steps.set.outputs.false == 'false'
+        run: echo "steps.set.outputs.false == 'false' was false"
+
+      - if: steps.set.outputs.false == false
+        run: echo "steps.set.outputs.val == false was false"
