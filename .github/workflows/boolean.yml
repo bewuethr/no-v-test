@@ -6,17 +6,25 @@ on:
 jobs:
   test:
     runs-on: ubuntu-22.04
+    env:
+      envtrue: true
+      envtruequotes: >-
+        'true'
+      envtruedoublequotes: >-
+        "true"
     steps:
       - id: set
         run: |
-          echo "true=true" >> "$GITHUB_OUTPUT"
-          echo "truequotes='true'" >> "$GITHUB_OUTPUT"
-          echo 'truedoublequotes="true"' >> "$GITHUB_OUTPUT"
-          echo "false=false" >> "$GITHUB_OUTPUT"
-          echo "falsequotes='false'" >> "$GITHUB_OUTPUT"
-          echo 'falsedoublequotes="false"' >> "$GITHUB_OUTPUT"
+          printf '%s\n'  >> "$GITHUB_OUTPUT" \
+            "true=true" \
+            "truequotes='true'"  \
+            'truedoublequotes="true"'  \
+            "false=false"  \
+            "falsequotes='false'"  \
+            'falsedoublequotes="false"'
 
-      - env:
+      - name: Comparing "true" from output
+        env:
           literal: ${{ steps.set.outputs.true == true }}
           fromjson: ${{ fromJSON(steps.set.outputs.true) == true }}
           literalquotes: ${{ steps.set.outputs.truequotes == true }}
@@ -37,7 +45,8 @@ jobs:
           echo "fromJSON(steps.set.outputs.truedoublequotes) == true: $fromjsondoublequotes"
           echo "fromJSON(steps.set.outputs.truedoublequotes) == 'true': $fromjsondoublequotesstring"
 
-      - env:
+      - name: Comparing "false" from output
+        env:
           literal: ${{ steps.set.outputs.false == false }}
           fromjson: ${{ fromJSON(steps.set.outputs.false) == false }}
           literalquotes: ${{ steps.set.outputs.falsequotes == false }}
@@ -57,3 +66,25 @@ jobs:
           echo "steps.set.outputs.falsedoublequotes == false: $literaldoublequotes"
           echo "fromJSON(steps.set.outputs.falsedoublequotes) == false: $fromjsondoublequotes"
           echo "fromJSON(steps.set.outputs.falsedoublequotes) == 'false': $fromjsondoublequotesstring"
+
+      - name: Comparing "true" from environment
+        env:
+          literal: ${{ envtrue == true }}
+          fromjson: ${{ fromJSON(envtrue) == true }}
+          literalquotes: ${{ envtruequotes == true }}
+          fromjsonquotes: ${{ fromJSON(envtruequotes) == true }}
+          fromjsonquotesstring: >-
+            ${{ fromJSON(envtruequotes) == 'true' }}
+          literaldoublequotes: ${{ envtruedoublequotes == true }}
+          fromjsondoublequotes: ${{ fromJSON(envtruedoublequotes) == true }}
+          fromjsondoublequotesstring: >-
+            ${{ fromJSON(envtruedoublequotes) == 'true' }}
+        run: |
+          echo "envtrue == true: $literal"
+          echo "fromJSON(envtrue) == true: $fromjson"
+          echo "envtruequotes == true: $literalquotes"
+          echo "fromJSON(envtruequotes) == true: $fromjsonquotes"
+          echo "fromJSON(envtruequotes) == 'true': $fromjsonquotesstring"
+          echo "envtruedoublequotes == true: $literaldoublequotes"
+          echo "fromJSON(envtruedoublequotes) == true: $fromjsondoublequotes"
+          echo "fromJSON(envtruedoublequotes) == 'true': $fromjsondoublequotesstring"
