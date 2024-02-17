@@ -10,22 +10,15 @@ jobs:
       - id: set
         run: |
           echo "true=true" >> "$GITHUB_OUTPUT"
-          echo "false=false" >> "$GITHUB_OUTPUT"
+          echo "truequotes='true'" >> "$GITHUB_OUTPUT"
 
-      - if: steps.set.outputs.true
-        run: echo "steps.set.outputs.true was true"
-
-      - if: steps.set.outputs.true == 'true'
-        run: echo "steps.set.outputs.true == 'true' was true"
-
-      - if: steps.set.outputs.true == true
-        run: echo "steps.set.outputs.val == true was true"
-
-      - if: '!steps.set.outputs.false'
-        run: echo "steps.set.outputs.false was false"
-
-      - if: steps.set.outputs.false == 'false'
-        run: echo "steps.set.outputs.false == 'false' was false"
-
-      - if: steps.set.outputs.false == false
-        run: echo "steps.set.outputs.val == false was false"
+      - env:
+          literal: ${{ steps.set.outputs.true }}
+          fromjson: ${{ fromJSON(steps.set.outputs.true) }}
+          literalquotes: ${{ steps.set.outputs.truequotes }}
+          fromjsonquotes: ${{ fromJSON(steps.set.outputs.truequotes) }}
+        run: |
+          echo "steps.set.outputs.true: $literal"
+          echo "fromJSON(steps.set.outputs.true): $fromjson"
+          echo "steps.set.outputs.truequotes: $literalquotes"
+          echo "fromJSON(steps.set.outputs.truequotes): $fromjsonquotes"
