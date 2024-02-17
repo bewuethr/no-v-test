@@ -69,25 +69,25 @@ jobs:
 
       - name: Comparing "true" from environment
         env:
-          literal: ${{ envtrue == true }}
-          fromjson: ${{ fromJSON(envtrue) == true }}
-          literalquotes: ${{ envtruequotes == true }}
-          fromjsonquotes: ${{ fromJSON(envtruequotes) == true }}
+          literal: ${{ env.envtrue == true }}
+          fromjson: ${{ fromJSON(env.envtrue) == true }}
+          literalquotes: ${{ env.envtruequotes == true }}
+          fromjsonquotes: ${{ fromJSON(env.envtruequotes) == true }}
           fromjsonquotesstring: >-
-            ${{ fromJSON(envtruequotes) == 'true' }}
-          literaldoublequotes: ${{ envtruedoublequotes == true }}
-          fromjsondoublequotes: ${{ fromJSON(envtruedoublequotes) == true }}
+            ${{ fromJSON(env.envtruequotes) == 'true' }}
+          literaldoublequotes: ${{ env.envtruedoublequotes == true }}
+          fromjsondoublequotes: ${{ fromJSON(env.envtruedoublequotes) == true }}
           fromjsondoublequotesstring: >-
-            ${{ fromJSON(envtruedoublequotes) == 'true' }}
+            ${{ fromJSON(env.envtruedoublequotes) == 'true' }}
         run: |
-          echo "envtrue == true: $literal"
-          echo "fromJSON(envtrue) == true: $fromjson"
-          echo "envtruequotes == true: $literalquotes"
-          echo "fromJSON(envtruequotes) == true: $fromjsonquotes"
-          echo "fromJSON(envtruequotes) == 'true': $fromjsonquotesstring"
-          echo "envtruedoublequotes == true: $literaldoublequotes"
-          echo "fromJSON(envtruedoublequotes) == true: $fromjsondoublequotes"
-          echo "fromJSON(envtruedoublequotes) == 'true': $fromjsondoublequotesstring"
+          echo "env.envtrue == true: $literal"
+          echo "fromJSON(env.envtrue) == true: $fromjson"
+          echo "env.envtruequotes == true: $literalquotes"
+          echo "fromJSON(env.envtruequotes) == true: $fromjsonquotes"
+          echo "fromJSON(env.envtruequotes) == 'true': $fromjsonquotesstring"
+          echo "env.envtruedoublequotes == true: $literaldoublequotes"
+          echo "fromJSON(env.envtruedoublequotes) == true: $fromjsondoublequotes"
+          echo "fromJSON(env.envtruedoublequotes) == 'true': $fromjsondoublequotesstring"
 
       - name: Step that gets skipped, which might be a surprise
         if: '!steps.set.outputs.false'
