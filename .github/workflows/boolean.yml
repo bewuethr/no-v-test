@@ -13,12 +13,12 @@ jobs:
           echo "truequotes='true'" >> "$GITHUB_OUTPUT"
 
       - env:
-          literal: ${{ steps.set.outputs.true }}
-          fromjson: ${{ fromJSON(steps.set.outputs.true) }}
-          literalquotes: ${{ steps.set.outputs.truequotes }}
-          fromjsonquotes: ${{ fromJSON(steps.set.outputs.truequotes) }}
+          literal: ${{ steps.set.outputs.true == true }}
+          fromjson: ${{ fromJSON(steps.set.outputs.true) == true }}
+          literalquotes: ${{ steps.set.outputs.truequotes == true }}
+          fromjsonquotes: ${{ fromJSON(steps.set.outputs.truequotes) == true }}
         run: |
-          echo "steps.set.outputs.true: $literal"
-          echo "fromJSON(steps.set.outputs.true): $fromjson"
-          echo "steps.set.outputs.truequotes: $literalquotes"
-          echo "fromJSON(steps.set.outputs.truequotes): $fromjsonquotes"
+          echo "steps.set.outputs.true == true: $literal"
+          echo "fromJSON(steps.set.outputs.true) == true: $fromjson"
+          echo "steps.set.outputs.truequotes == true: $literalquotes"
+          echo "fromJSON(steps.set.outputs.truequotes) == true: $fromjsonquotes"
