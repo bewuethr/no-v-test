@@ -1,0 +1,23 @@
+name: Create branch on assignment
+
+on:
+  issues:
+    types:
+      - assigned
+
+jobs:
+  createbranch:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4.1.1
+
+      - name: Create issue branch
+        env:
+          number: ${{ github.event.issue.number }}
+          title: ${{ github.event.issue.title }}
+        run: |
+          title=${title// /-}
+          branchname=$number-${title,,}
+          git switch -c "$branchname"
+          git push -u origin "$branchname"
