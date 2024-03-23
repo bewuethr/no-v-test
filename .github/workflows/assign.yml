@@ -8,7 +8,7 @@ on:
 jobs:
   createbranch:
     runs-on: ubuntu-22.04
-    permission:
+    permissions:
       contents: write
     steps:
       - name: Check out repository
