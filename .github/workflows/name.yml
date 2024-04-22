@@ -1,0 +1,25 @@
+name: Verify
+run-name: >-
+  ${{ github.event.pull_request.number &&
+      format('Verify PR {0}', github.event.pull_request.number) ||
+      format('Verify {0} {1}', github.ref_type, github.ref_name) }}
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - edited
+      - synchronize
+    branches:
+      - main
+
+jobs:
+  verify:
+    runs-on: ubuntu-22.04
+    steps:
+      - run: echo "Hello"
