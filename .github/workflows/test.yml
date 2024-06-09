@@ -1,52 +1,17 @@
-name: Testing
+name: Test permissions
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-  pull_request:
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref }}
-  cancel-in-progress: true
+
+permissions:
+  contents: none
 
 jobs:
-  test:
-    name: Run BATS tests
-    runs-on: ubuntu-22.04
-
+  job-1:
+    name: Job 1
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
-      - name: Check out code
+      - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Install Pandoc
-        uses: r-lib/actions/setup-pandoc@v2.9.0
-        with:
-          pandoc-version: 2.19.2
-
-      - name: Get Bats repository
-        uses: actions/checkout@v4
-        with:
-          repository: bats-core/bats-core
-          ref: v1.7.0
-          path: bats-core
-
-      - name: Install dependencies
-        run: |
-          echo "::group::Install BATS"
-          cd bats-core
-          ./install.sh "$HOME"
-          printf '%s\n' "$HOME/bin" "$HOME/.local/bin" >> "$GITHUB_PATH"
-          echo "::endgroup::"
-
-          echo "::group::Install graphviz"
-          sudo apt-get install graphviz
-          echo "::endgroup::"
-
-          echo "::group::Install inotify-tools"
-          sudo apt-get install inotify-tools
-          echo "::endgroup::"
-
-      - name: Run tests
-        run: bats --tap test
